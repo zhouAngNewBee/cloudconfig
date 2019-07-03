@@ -1,0 +1,47 @@
+spring:
+  datasource:
+    url: jdbc:mysql://120.26.221.15:3306/common?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: dq
+    password: dq20160101
+    type: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    minIdle: 10
+    maxActive: 35
+    connectionTimeout: 30000
+    maxLifetime: 120000
+    validationQuery: select 1
+  cache:
+    cache-names: tenant,channel,key,oss
+    redis:
+      time-to-live: 60s
+  redis:
+    host: 120.26.221.15
+    port: 6888
+    password: seltek
+    database: 12
+    jedis:
+      pool:
+        max-active: 100
+        max-idle: 20
+        min-idle: 10
+  dubbo:
+    application:
+      name: common-service
+      logger: slf4j
+    base-package: cn.seltek.cloud.server.common
+    registry:
+      address: 127.0.0.1
+      port: 11111
+    protocol:
+      name: dubbo
+      serialization: hessian2
+      port: 28890
+    provider:
+      retries: 0
+      timeout: 5000
+    consumer:
+      retries: 0
+      timeout: 5000
+      check: false
+server:
+  port: 6666
